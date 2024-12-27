@@ -260,7 +260,7 @@ app.get("/test", async (req, res) => {
 });
 
 // ---------- Start Server ----------
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () =>
   logWithTimestamp(`Server running on http://localhost:${PORT}`)
 );
