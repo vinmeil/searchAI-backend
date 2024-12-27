@@ -254,6 +254,11 @@ app.post("/search", async (req, res) => {
   res.json(products);
 });
 
+app.get("/test", async (req, res) => {
+  // return a simple "hello world" response
+  res.send("Hello, world!");
+});
+
 // ---------- Start Server ----------
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () =>

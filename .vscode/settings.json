@@ -1,0 +1,4 @@
+{
+  "appService.defaultWebAppToDeploy": "undefined/subscriptions/4ca53812-0bbb-447e-a213-ba77154c08f4/resourceGroups/searchai-backend/providers/Microsoft.Web/sites/searchai-backend",
+  "appService.deploySubpath": "."
+}
