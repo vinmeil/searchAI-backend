@@ -4,7 +4,6 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "install": "npm install",
     "postinstall": "npx puppeteer browsers install chrome"
   },
   "keywords": [],
