@@ -121,8 +121,13 @@ async function scrapeOhgatchaProducts(keywords) {
   return await scrapeSite("Ohgatcha", "scrape_ohgatcha.js", keywords);
 }
 
+const { scrapeGoodSmile } = require(path.resolve(
+  __dirname,
+  "./scrape_zalora.js"
+));
 async function scrapeGoodSmileProducts(keywords) {
-  return await scrapeSite("Goodsmile", "scrape_goodsmile.js", keywords);
+  // return await scrapeSite("Goodsmile", "scrape_goodsmile.js", keywords);
+  return await scrapeGoodSmile(keywords);
 }
 
 async function scrapeAnimateProducts(keywords) {
@@ -177,10 +182,10 @@ async function scrapeAllProducts(keywords) {
   // Start scraping tasks for all sites
   const tasks = [
     // scrapeCarousellProducts(keywords),
-    scrapeZaloraProducts(keywords),
+    // scrapeZaloraProducts(keywords),
     // scrapePgmallProducts(keywords),
     // scrapeOhgatchaProducts(keywords),
-    // scrapeGoodSmileProducts(keywords),
+    scrapeGoodSmileProducts(keywords),
     // scrapeAnimateProducts(keywords),
     // scrapeHobilityProducts(keywords),
     // scrapeHololiveProducts(keywords),
@@ -199,10 +204,10 @@ async function scrapeAllProducts(keywords) {
   // Combine results into a structured object
   const allProducts = {
     // Carousell: results[0],
-    Zalora: results[0],
+    // Zalora: results[1],
     // PGMall: results[2],
     // Ohgatcha: results[3],
-    // GoodSmile: results[4],
+    GoodSmile: results[0],
     // Animate: results[5],
     // Hobility: results[6],
     // Hololive: results[7],
