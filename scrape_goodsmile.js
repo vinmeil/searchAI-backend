@@ -29,6 +29,7 @@ async function scrapeGoodSmile(keywords) {
   }
 
   const page = await browser.newPage();
+  await page.setDefaultNavigationTimeout(0);
   await page.goto(URL, { waitUntil: "networkidle2" });
 
   const products = await page.evaluate(() => {
