@@ -198,7 +198,7 @@ async function scrapeAllProducts(keywords) {
     // scrapeShirotoysProducts(keywords),
     // scrapeSkyeProducts(keywords),
     // scrapeMalboroProducts(keywords),
-    // scrapeMercariProducts(keywords),
+    scrapeMercariProducts(keywords),
     // scrapeGanknowProducts(keywords),
     // scrapeEpicnpcProducts(keywords),
   ];
