@@ -12,6 +12,7 @@
   "description": "",
   "dependencies": {
     "@langchain/ollama": "^0.1.4",
+    "@sparticuz/chromium-min": "^131.0.1",
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
