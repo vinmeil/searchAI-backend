@@ -1,10 +1,40 @@
 const puppeteer = require("puppeteer");
+const puppeteerCore = require("puppeteer-core");
+const chromium = require("@sparticuz/chromium-min");
+
+chromium.setHeadlessMode = true;
+chromium.setGraphicsMode = false;
 
 async function scrapeZalora(keywords) {
   const URL = `https://www.zalora.com.my/search?q=${keywords}`;
-  const browser = await puppeteer.launch({
-    args: ["--no-sandbox", "--disable-setuid-sandbox"], // FIXME: dangerous. remove in future maybe
-  });
+  let browser;
+  const maxDuration = 60 * 1000; // 60 seconds
+  if (
+    process.env.NODE_ENV === "production" ||
+    process.env.VERCEL_ENV === "production"
+  ) {
+    // Use puppeteer-core with chromium-min in production (Vercel)
+    const executablePath = await chromium.executablePath(
+      "https://github.com/Sparticuz/chromium/releases/download/v131.0.1/chromium-v131.0.1-pack.tar"
+    );
+    // console.log("Path: ", path.resolve(__dirname, '../chromium'));
+    // const executablePath = await chromium.executablePath(path.resolve(__dirname, '../chromium'));
+    browser = await puppeteerCore.launch({
+      executablePath,
+      args: chromium.args,
+      headless: chromium.headless,
+      defaultViewport: chromium.defaultViewport,
+      ignoreHTTPSErrors: true,
+      timeout: maxDuration,
+    });
+  } else {
+    // Use puppeteer locally
+    browser = await puppeteer.launch({
+      headless: true,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
+  }
+
   const page = await browser.newPage();
   await page.goto(URL, { waitUntil: "networkidle2" });
 
@@ -51,9 +81,13 @@ async function scrapeZalora(keywords) {
   return products;
 }
 
-const keywords = process.argv[2];
-scrapeZalora(keywords).then((products) => {
-  console.log(JSON.stringify(products));
-});
-
 module.exports = { scrapeZalora };
+
+const keywords = process.argv[2];
+scrapeZalora(keywords)
+  .then((products) => {
+    console.log(JSON.stringify(products));
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
