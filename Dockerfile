@@ -1,15 +1,10 @@
-FROM node:18
+FROM ghcr.io/puppeteer/puppeteer:23.11.1
 
-ENV NODE_ENV=production
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
-COPY ["package.json", "package-lock.json*", "./"]
-
-RUN npm install --production
-
+COPY package*.json ./
+RUN npm ci
 COPY . .
-
-EXPOSE 8080
-
-CMD [ "npm", "start" ]
+CMD [ "node", "index.js" ]
