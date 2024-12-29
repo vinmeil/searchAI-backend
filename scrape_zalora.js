@@ -14,17 +14,32 @@ async function scrapeZalora(keywords) {
     process.env.VERCEL_ENV === "production"
   ) {
     // Use puppeteer-core with chromium-min in production (Vercel)
-    const executablePath = await chromium.executablePath(
-      "https://github.com/Sparticuz/chromium/releases/download/v131.0.1/chromium-v131.0.1-pack.tar"
-    );
-    // console.log("Path: ", path.resolve(__dirname, '../chromium'));
-    // const executablePath = await chromium.executablePath(path.resolve(__dirname, '../chromium'));
-    browser = await puppeteerCore.launch({
-      executablePath,
-      args: chromium.args,
-      headless: chromium.headless,
-      defaultViewport: chromium.defaultViewport,
-      ignoreHTTPSErrors: true,
+    // const executablePath = await chromium.executablePath(
+    //   "https://github.com/Sparticuz/chromium/releases/download/v131.0.1/chromium-v131.0.1-pack.tar"
+    // );
+    // // console.log("Path: ", path.resolve(__dirname, '../chromium'));
+    // // const executablePath = await chromium.executablePath(path.resolve(__dirname, '../chromium'));
+    // browser = await puppeteerCore.launch({
+    //   executablePath,
+    //   args: chromium.args,
+    //   headless: chromium.headless,
+    //   defaultViewport: chromium.defaultViewport,
+    //   ignoreHTTPSErrors: true,
+    //   timeout: maxDuration,
+    // });
+
+    // using puppeteer and docker
+    browser = await puppeteer.launch({
+      args: [
+        "--disable-setuid-sandbox",
+        "--no-sandbox",
+        "--single-process",
+        "--no-zygote",
+      ],
+      executablePath:
+        process.env.NODE_ENV === "production"
+          ? process.env.PUPPETEER_EXECUTABLE_PATH
+          : puppeteer.executablePath(),
       timeout: maxDuration,
     });
   } else {
@@ -37,6 +52,7 @@ async function scrapeZalora(keywords) {
 
   const page = await browser.newPage();
   await page.goto(URL, { waitUntil: "networkidle2" });
+  await page.setViewport({ width: 1080, height: 1024 });
 
   const products = await page.evaluate(() => {
     const productElements = document.querySelectorAll(
