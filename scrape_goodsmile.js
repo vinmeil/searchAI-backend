@@ -3,6 +3,7 @@ const puppeteer = require("puppeteer");
 async function scrapeGoodSmile(keywords) {
   const URL = `https://www.goodsmile.com/en/search?search_keyword=${keywords}`;
   let browser;
+  const maxDuration = 60 * 1000; // 60 seconds
   if (
     process.env.NODE_ENV === "production" ||
     process.env.VERCEL_ENV === "production"
