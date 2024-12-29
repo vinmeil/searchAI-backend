@@ -198,7 +198,7 @@ async function scrapeAllProducts(keywords) {
     // scrapeShirotoysProducts(keywords),
     // scrapeSkyeProducts(keywords),
     // scrapeMalboroProducts(keywords),
-    scrapeMercariProducts(keywords),
+    // scrapeMercariProducts(keywords),
     // scrapeGanknowProducts(keywords),
     // scrapeEpicnpcProducts(keywords),
   ];
@@ -224,7 +224,7 @@ async function scrapeAllProducts(keywords) {
     // Ganknow: results[13],
     // EpicNPC: results[14],
     GoodSmile: results[0],
-    Mercari: results[1],
+    // Mercari: results[1],
   };
 
   Object.keys(allProducts).forEach((site) => {
