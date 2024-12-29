@@ -2,7 +2,7 @@ FROM ghcr.io/puppeteer/puppeteer:23.11.1
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json ./
 RUN npm ci
