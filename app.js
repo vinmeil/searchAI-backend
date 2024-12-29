@@ -162,8 +162,13 @@ async function scrapeGanknowProducts(keywords) {
   return await scrapeSite("Ganknow", "scrape_ganknow.js", keywords);
 }
 
+const { scrapeMercari } = require(path.resolve(
+  __dirname,
+  "./scrape_mercari.js"
+));
 async function scrapeMercariProducts(keywords) {
-  return await scrapeSite("Mercari", "scrape_mercari.js", keywords);
+  // return await scrapeSite("Mercari", "scrape_mercari.js", keywords);
+  return await scrapeMercari(keywords);
 }
 
 async function scrapeEpicnpcProducts(keywords) {
@@ -207,7 +212,7 @@ async function scrapeAllProducts(keywords) {
     // Zalora: results[1],
     // PGMall: results[2],
     // Ohgatcha: results[3],
-    GoodSmile: results[0],
+    // GoodSmile: results[4],
     // Animate: results[5],
     // Hobility: results[6],
     // Hololive: results[7],
@@ -218,6 +223,8 @@ async function scrapeAllProducts(keywords) {
     // Mercari: results[12],
     // Ganknow: results[13],
     // EpicNPC: results[14],
+    GoodSmile: results[0],
+    Mercari: results[1],
   };
 
   Object.keys(allProducts).forEach((site) => {
