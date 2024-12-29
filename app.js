@@ -123,7 +123,7 @@ async function scrapeOhgatchaProducts(keywords) {
 
 const { scrapeGoodSmile } = require(path.resolve(
   __dirname,
-  "./scrape_zalora.js"
+  "./scrape_goodsmile.js"
 ));
 async function scrapeGoodSmileProducts(keywords) {
   // return await scrapeSite("Goodsmile", "scrape_goodsmile.js", keywords);
