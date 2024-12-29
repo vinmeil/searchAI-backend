@@ -23,6 +23,7 @@ async function scrapeMercari(keywords) {
           ? process.env.PUPPETEER_EXECUTABLE_PATH
           : puppeteer.executablePath(),
       timeout: maxDuration,
+      headless: true,
     });
   } else {
     browser = await puppeteer.launch({

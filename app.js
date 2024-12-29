@@ -187,10 +187,10 @@ async function scrapeAllProducts(keywords) {
   // Start scraping tasks for all sites
   const tasks = [
     // scrapeCarousellProducts(keywords),
-    // scrapeZaloraProducts(keywords),
+    scrapeZaloraProducts(keywords),
     // scrapePgmallProducts(keywords),
     // scrapeOhgatchaProducts(keywords),
-    scrapeGoodSmileProducts(keywords),
+    // scrapeGoodSmileProducts(keywords),
     // scrapeAnimateProducts(keywords),
     // scrapeHobilityProducts(keywords),
     // scrapeHololiveProducts(keywords),
@@ -209,7 +209,7 @@ async function scrapeAllProducts(keywords) {
   // Combine results into a structured object
   const allProducts = {
     // Carousell: results[0],
-    // Zalora: results[1],
+    Zalora: results[0],
     // PGMall: results[2],
     // Ohgatcha: results[3],
     // GoodSmile: results[4],
@@ -223,7 +223,7 @@ async function scrapeAllProducts(keywords) {
     // Mercari: results[12],
     // Ganknow: results[13],
     // EpicNPC: results[14],
-    GoodSmile: results[0],
+    // GoodSmile: results[0],
     // Mercari: results[1],
   };
 
